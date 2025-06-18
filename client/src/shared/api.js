@@ -1,5 +1,5 @@
 import { SERVER_ADDRESS } from "./constants";
-
+import { GIPHY_API_KEY } from "./constants";
 
 const METHOD_ENUM = {
     GET: 'GET',
@@ -53,6 +53,18 @@ const options = (methodType, data) => {
     }
 }
 
+
+export const fetchGifs = async (searchQuery = '') => {
+    try {
+        const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${searchQuery}&limit=6`);
+        const data = await response.json();
+        return data.data;
+    } catch (error) {
+        console.error("Error fetching GIFs:", error);
+        return [];
+    }
+}
+
 export const Boards = {
     getAll: (async () => {
         try {
@@ -87,7 +99,15 @@ export const Cards = {
 
         }
     }),
-    create: () => {},
+    create: (async (card) => {
+        try {
+            const response = await (await fetch(`${SERVER_ADDRESS}/api/boards/${card.boardId}/cards`, options(METHOD_ENUM.POST, card))).json();
+            return response.card;
+        } catch (error) {
+            console.error("Error creating card:", error);
+            throw error;
+        }
+    }),
     delete: () => {},
     update: () => {},
 }

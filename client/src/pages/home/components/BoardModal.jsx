@@ -26,7 +26,6 @@ export default function BoardModal({showModal, setShowModal}) {
             category: formData.get('category'),
             author: formData.get('author'),
         };
-
         setBoardData(boardData);
         updateBoardList([...boards, boardData])
     }

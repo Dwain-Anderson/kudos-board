@@ -44,7 +44,6 @@ server.delete('/api/boards/:id', async (req, res) => {
 server.get('/api/boards/:id/cards', async (req, res) => {
     try {
         const { id } = req.params;
-        console.log(req.params);
         const cards = await CardController.getAll(id);
         res.json({ message: 'success', cards, status: 200 });
     } catch (error) {
