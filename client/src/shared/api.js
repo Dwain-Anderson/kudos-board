@@ -57,30 +57,37 @@ export const Boards = {
     getAll: (async () => {
         try {
             const response = await (await fetch(`${SERVER_ADDRESS}/api/boards`, options(METHOD_ENUM.GET))).json();
-            console.log(response);
             return response.boards
         } catch (error) {
-            console.log(error);
         }
     }),
     create: (async (board) => {
         try {
             const response = await (await fetch(`${SERVER_ADDRESS}/api/boards`, options(METHOD_ENUM.POST, board))).json();
-            console.log(response);
             return response.board
         } catch (error) {
-            console.log(error);
+
         }}),
     delete: (async (boardId) => {
         try {
             const response = await (await fetch(`${SERVER_ADDRESS}/api/boards/${boardId}`, options(METHOD_ENUM.DELETE))).json();
-            console.log(response);
             return response.board
         } catch (error) {
-            console.log(error);
+
         }
-
-
-
     }),
+}
+
+export const Cards = {
+    getAll: (async (boardId) => {
+        try {
+            const response = await (await fetch(`${SERVER_ADDRESS}/api/boards/${boardId}/cards`, options(METHOD_ENUM.GET))).json();
+            return response.cards
+        } catch (error) {
+
+        }
+    }),
+    create: () => {},
+    delete: () => {},
+    update: () => {},
 }

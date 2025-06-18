@@ -4,6 +4,7 @@ import Search from './components/Search';
 import Sort from './components/Filter';
 import BoardModal from './components/BoardModal';
 import { useState } from 'react';
+import { Header, Footer } from '../../shared/components/Partials'
 import './Home.css';
 
 
@@ -15,9 +16,9 @@ export default function Home() {
         setShowModal(true);
     }
 
-
     return (
         <>
+            <Header/>
             <BoardListProvider>
                 <section className="banner">
                     <Search/>
@@ -27,7 +28,7 @@ export default function Home() {
                 <BoardList/>
                 {showModal && <BoardModal showModal={showModal} setShowModal={setShowModal}/>}
             </BoardListProvider>
-
+            <Footer/>
         </>
     )
 }
