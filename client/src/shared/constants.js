@@ -1,5 +1,5 @@
 export const SERVER_ADDRESS = import.meta.env.VITE_SERVER_ADDRESS
-
+export const GIPHY_API_KEY = import.meta.env.VITE_GIPHY_API_KEY
 export const FILTER_ENUM = {
     ALL: 'all',
     RECENT: 'recent',

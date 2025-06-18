@@ -21,7 +21,7 @@ export default function CardListProvider({ boardId, children }) {
 
 
     return (
-        <CardListContext.Provider value={{cards, updateCardList}}>
+        <CardListContext.Provider value={{cards, updateCardList, boardId}}>
             {children}
         </CardListContext.Provider>
     )
