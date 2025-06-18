@@ -1,0 +1,124 @@
+
+.card-container {
+    display: block;
+    width: 100%;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    padding: 0;
+    width: 100%;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card-title {
+    color: #000000;
+    display: -webkit-box;
+    font-size: 16px;
+    font-weight: 600;
+    height: 40px;
+    letter-spacing: 0.2px;
+    line-height: 1.2;
+    margin: 8px 10px;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.card-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2/3;
+}
+
+.card-image {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    min-height: 100%;
+    min-width: 100%;
+    color: #000000;
+    background-color: #000000;
+}
+
+.card-category {
+    color: #000000;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 4px 0 8px;
+    text-align: center;
+}
+
+.delete-button {
+
+}
+
+@media (max-width: 768px) {
+    .card {
+        border-radius: 6px;
+    }
+
+    .card-title {
+        font-size: 14px;
+        height: 36px;
+        margin: 6px 6px;
+        -webkit-line-clamp: 2;
+        color: #000000;
+    }
+
+    .card-container {
+        aspect-ratio: 2/3;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .card-category {
+        font-size: 12px;
+        margin: 2px 0 6px;
+        color: #000000;
+    }
+
+}
+
+@media (max-width: 375px) {
+    .card-title {
+        font-size: 12px;
+        height: 32px;
+        margin: 4px 4px;
+    }
+
+    .card-category {
+        font-size: 11px;
+        margin: 0 0 4px;
+    }
+}
