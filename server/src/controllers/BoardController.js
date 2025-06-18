@@ -6,7 +6,7 @@ const BoardController = {
             const boards = await database.board.findMany();
             return boards || [];
         } catch (error) {
-            throw error;
+            throw new Error(error);
         }
     }),
     create: (async (data) => {
@@ -28,7 +28,7 @@ const BoardController = {
     }),
     delete: (async (id) => {
         try {
-            const board = await database.board.delete({ where: { id: id } });
+            const board = await database.board.delete({ where: { id: Number(id) } });
             return board;
         } catch (error) {
             throw error;

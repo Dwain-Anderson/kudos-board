@@ -2,6 +2,7 @@
   "dependencies": {
     "@prisma/client": "^6.9.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.21.2",
     "pg": "^8.16.0"
   },
@@ -12,10 +13,8 @@
     "db:migrate": "prisma migrate dev",
     "db:reset": "prisma migrate reset --force",
     "db:seed": "node prisma/seed.js",
-    "db:init": "npm run db:reset && npm run db:migrate && npm run db:seed",
-    "psql": "psql shelterdb -U app_user"
+    "db:init": "npm run db:reset && npm run db:migrate && npm run db:seed"
   },
-
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
