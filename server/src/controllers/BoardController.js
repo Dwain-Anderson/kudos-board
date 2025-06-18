@@ -1,6 +1,7 @@
 const { database } = require('../shared');
 
 const BoardController = {
+    
     getAll: (async () => {
         try {
             const boards = await database.board.findMany();

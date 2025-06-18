@@ -10,6 +10,7 @@ export default function Search() {
         const query = event.target.query.value
         const filteredBoards = boards.filter(board => board.title.toLowerCase().includes(query.toLowerCase()))
         updateBoardList(filteredBoards)
+        event.target.reset()
     };
 
     const handleClick = (event) => {
