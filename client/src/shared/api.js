@@ -108,6 +108,13 @@ export const Cards = {
             throw error;
         }
     }),
-    delete: () => {},
+    delete: (async (cardId, boardId) => {
+        try {
+            const response = await (await fetch(`${SERVER_ADDRESS}/api/boards/${boardId}/cards/${cardId}`, options(METHOD_ENUM.DELETE))).json();
+            return response.board
+        } catch (error) {
+
+        }
+    }),
     update: () => {},
 }

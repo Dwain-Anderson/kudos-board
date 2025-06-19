@@ -105,7 +105,6 @@ export default function CardModal({ showModal, setShowModal }) {
                     console.error("Error creating card:", error);
                 }
             };
-
             createCard();
         }
     }, [state.cardData]);
