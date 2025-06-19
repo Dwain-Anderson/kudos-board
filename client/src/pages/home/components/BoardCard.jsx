@@ -31,7 +31,6 @@ export default function BoardCard({ board }) {
     }, [currentState]);
 
 
-
     return (
         <span className="card-container">
             <article className="card">

@@ -61,6 +61,16 @@ server.post('/api/boards/:id/cards', async (req, res) => {
     }
 })
 
+server.delete('/api/boards/:id/cards/:cardId', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const card = await CardController.delete(id);
+        res.json({ message: 'success', card, status: 200 });
+    } catch (error) {
+        res.status(500).json({ message: 'error', error: error.message, status: 500 });
+    }
+})
+
 server.use('/*', (req, res, next) => {
     next({ status: 404, message: 'Not found' })
 })

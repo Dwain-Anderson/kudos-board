@@ -28,8 +28,8 @@ export default function Filter() {
 
     const handleFilter = (event) => {
         event.preventDefault();
-        const FILTERType = event.target.value;
-        filterBoards(FILTERType);
+        const filterType = event.target.value;
+        filterBoards(filterType);
     };
 
     return (

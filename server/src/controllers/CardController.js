@@ -20,7 +20,11 @@ const CardController = {
         return database.card.create({data: cardData})
     },
     update: () => {},
-    delete: () => {},
+    delete: (async (id) => {
+        const card = await database.card.delete({ where: { id: Number(id) } });
+        return card;
+    })
+
 }
 
 module.exports = CardController;
