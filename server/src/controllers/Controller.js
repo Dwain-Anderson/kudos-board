@@ -1,7 +1,8 @@
-const { database } = require('../shared');
+const { database, TABLE_NAMES_ENUM } = require('../shared');
 
 const Controller = {
     /**
+     * (https://en.wikipedia.org/wiki/Functor)/(https://ocaml.org/docs/functors)
      * Creates a controller with CRUD operations for a database module
      * @param {Object} module - Module configuration with tableName and optional foreignKeys and hooks
      * @returns {Object} Controller object with CRUD methods
@@ -57,20 +58,11 @@ const Controller = {
             update: async (id, data) => {
                 const updateData = {};
                 Object.keys(data).forEach((key) => {
-                    // Skip the id field as it cannot be included in the update data
                     if (data[key] !== undefined && key !== 'id') {
                         updateData[key] = data[key];
                     }
                 });
 
-                // Handle pinnedDate -> pinnedAt field name mismatch
-                if (data) {
-                    const pinnedDate = data['pinnedDate'];
-                    if (pinnedDate !== undefined && !('pinnedAt' in data)) {
-                        updateData.pinnedAt = pinnedDate;
-                        delete updateData.pinnedDate;
-                    }
-                }
 
                 if (Object.keys(updateData).length === 0) {
                     return await database[module.tableName].findUnique({ where: { id: Number(id) } });
@@ -97,31 +89,38 @@ const Controller = {
 };
 
 const BoardModule = {
-    tableName: 'board',
+    tableName: TABLE_NAMES_ENUM.BOARD ,
     foreignKeys: [],
     hooks: {
         onDelete: async (boardId) => {
-            await database.card.deleteMany({ where: { boardId: Number(boardId) } });
+            await database[TABLE_NAMES_ENUM.CARD].deleteMany({ where: { boardId: Number(boardId) } });
         },
     },
 };
 
-
 const CardModule = {
-    tableName: 'card',
+    tableName: TABLE_NAMES_ENUM.CARD,
     foreignKeys: ['boardId'],
     hooks: {
         onDelete: async (cardId) => {
-            await database.pin.deleteMany({ where: { cardId: Number(cardId) } });
+            await database[TABLE_NAMES_ENUM.COMMENT].deleteMany({ where: { cardId: Number(cardId) } });
         },
     },
 };
+
+
+const CommentModule = {
+    tableName: TABLE_NAMES_ENUM.COMMENT,
+    foreignKeys: ['cardId'],
+}
 
 
 Object.freeze(BoardModule);
 Object.freeze(CardModule);
+Object.freeze(CommentModule);
 
 const BoardController = Controller.Make(BoardModule);
 const CardController = Controller.Make(CardModule);
+const CommentController = Controller.Make(CommentModule);
 
-module.exports = { BoardController, CardController};
+module.exports = { BoardController, CardController, CommentController};

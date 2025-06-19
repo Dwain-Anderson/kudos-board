@@ -3,7 +3,7 @@ const cors = require('cors');
 const server = express();
 server.use(express.json());
 server.use(cors());
-const { BoardController, CardController } = require('./controllers/Controller');
+const { BoardController, CardController, CommentController } = require('./controllers/Controller');
 
 
 server.use('/*', (req, res, next) => {
@@ -122,6 +122,28 @@ server.put('/api/boards/:boardId/cards/:cardId', async (req, res) => {
         res.status(500).json({ message: 'error', error: error.message, status: 500 });
     }
 })
+
+
+server.get('/api/boards/:boardId/cards/:cardId/comments', async (req, res) => {
+    try {
+        const { boardId, cardId } = req.params;
+        const comments = await CommentController.getAll(cardId);
+        res.json({ message: 'success', comments, status: 200 });
+    } catch (error) {
+        res.status(500).json({ message: 'error', error: error.message, status: 500 });
+    }
+})
+
+server.post('/api/boards/:boardId/cards/:cardId/comments', async (req, res) => {
+    try {
+        const { boardId, cardId } = req.params;
+        const comment = await CommentController.create(req.body, cardId);
+        res.json({ message: 'success', comment, status: 200 });
+    } catch (error) {
+        res.status(500).json({ message: 'error', error: error.message, status: 500 });
+    }
+})
+
 
 server.use('/*', (req, res, next) => {
     next({ status: 404, message: 'Not found' })

@@ -1,4 +1,10 @@
 const { PrismaClient } = require('./generated/prisma');
 const database = new PrismaClient();
 
-module.exports = { database };
+const TABLE_NAMES_ENUM = {
+    BOARD: 'board',
+    CARD: 'card',
+    COMMENT: 'comment',
+}
+
+module.exports = { database, TABLE_NAMES_ENUM };

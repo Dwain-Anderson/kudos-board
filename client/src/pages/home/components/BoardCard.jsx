@@ -21,8 +21,7 @@ export default function BoardCard({ board }) {
             try {
                 const board = await Boards.delete(boardId);
                 updateBoardList(boards.filter(b => b.id !== boardId));
-            }
-            catch (error) {
+            } catch (error) {
 
             }
         }
@@ -37,7 +36,7 @@ export default function BoardCard({ board }) {
             <article className="card">
                 <div className="card-image-container">
                     <img
-                        src={board.imageUrl || 'https://placehold.co/600x300?text=No+Image'}
+                        src={board.imageUrl}
                         alt={`${board.title} poster`}
                         className="card-image"
                     />
