@@ -1,4 +1,4 @@
-.board-list {
+.card-list {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -7,7 +7,7 @@
   padding: 20px;
 }
 
-.board-list-empty {
+.card-list-empty {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
@@ -20,13 +20,13 @@
   text-align: center;
 }
 
-.board-list-empty h3 {
+.card-list-empty h3 {
   color: #2c3e50;
   font-size: 24px;
   margin-bottom: 10px;
 }
 
-.board-list-empty p {
+.card-list-empty p {
   color: #7f8c8d;
   font-size: 16px;
   line-height: 1.5;
@@ -34,7 +34,7 @@
 }
 
 @media (max-width: 768px) {
-  .board-list {
+  .card-list {
     gap: 15px;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     padding: 15px;
@@ -42,7 +42,7 @@
 }
 
 @media (max-width: 480px) {
-  .board-list {
+  .card-list {
     gap: 10px;
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     padding: 10px;

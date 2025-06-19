@@ -12,7 +12,7 @@ export default function BoardModal({showModal, setShowModal}) {
     }
 
     const handleOverlayClick = (event) => {
-        if (event.target.className === 'modal-overlay') {
+        if (event.target.className === 'modal') {
             setShowModal(false);
             setBoardData(null)
         }

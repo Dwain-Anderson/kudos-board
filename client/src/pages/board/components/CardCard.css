@@ -1,0 +1,60 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-actions {
+  align-items: center;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.card-container {
+  display: block;
+  height: 100%;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.card-upvote {
+  margin: 0;
+}
+
+.card-upvote-button {
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: 20px;
+  color: #3498db;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 10px;
+  transition: background-color 0.2s ease;
+}
+
+.card-upvote-button:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+.card-upvote-button svg {
+  margin-right: 5px;
+}
+
+
+.delete-button {
+  background: none;
+  border-radius: 20px;
+  color: #e74c3c;
+  margin: 0;
+  padding: 6px 10px;
+}
+
+.delete-button:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+}

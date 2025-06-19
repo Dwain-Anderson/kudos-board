@@ -1,4 +1,5 @@
-import '../../../shared/Card.css'
+import '../../../pages/home/components/BoardCard.css'
+import './CardCard.css' 
 import { STATE_ENUM } from '../../../shared/constants';
 import { useState, useEffect, useContext } from 'react';
 import { Cards } from "../../../shared/api";
@@ -49,16 +50,23 @@ export default function CardCard({card}) {
             <article className="card">
                 <div className="card-image-container">
                     <img
-                        src={card.gif === "" ? null : card.gif}
-                        alt={`${card.message} `}
+                        src={card.gifUrl || 'https://placehold.co/600x300?text=No+Image'}
+                        alt={`${card.message}`}
                         className="card-image"
                     />
                 </div>
                 <h2 className="card-title">{card.message}</h2>
-                <button onClick={handleUpvote} className="card-upvote-button">
-                    <p className="card-upvote"> {card.upvotes}</p>
-                </button>
-                <button onClick={handleClick} className='delete-button'>Delete</button>
+                {card.author && <p className="card-category">By: {card.author}</p>}
+
+                <div className="card-actions">
+                    <button onClick={handleUpvote} className="card-upvote-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M12 19V5M5 12l7-7 7 7"/>
+                        </svg>
+                        <span className="card-upvote">{upvotes}</span>
+                    </button>
+                    <button onClick={handleClick} className='delete-button'>Delete</button>
+                </div>
             </article>
         </span>
     )
