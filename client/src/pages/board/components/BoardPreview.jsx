@@ -7,7 +7,7 @@ export default function BoardPreview({ board }) {
             <div className="board-preview-card">
                 <div className="board-preview-image-container">
                     <img
-                        src={board.imageUrl || 'https://placehold.co/600x300?text=Board+Preview'}
+                        src={board.imageUrl}
                         alt={`${board.title} preview`}
                         className="board-preview-image"
                     />

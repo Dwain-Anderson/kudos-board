@@ -32,6 +32,11 @@ export default function BoardModal({showModal, setShowModal}) {
 
     useEffect(() => {
         if (boardData) {
+            /**
+             * Creates a new board with the current board data
+             * @async
+             * @returns {Promise<void>}
+             */
             const createBoard = async () => {
                 try {
                     const board = await Boards.create(boardData);

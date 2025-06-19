@@ -76,6 +76,11 @@ export default function CardModal({ showModal, setShowModal }) {
 
     useEffect(() => {
         if (state.searchQuery) {
+            /**
+             * Searches for GIFs based on the current search query
+             * @async
+             * @returns {Promise<void>}
+             */
             const searchGifs = async () => {
                 try {
                     const gifsData = await fetchGifs(state.searchQuery);
@@ -95,6 +100,11 @@ export default function CardModal({ showModal, setShowModal }) {
 
     useEffect(() => {
         if (state.cardData) {
+            /**
+             * Creates a new card with the current card data
+             * @async
+             * @returns {Promise<void>}
+             */
             const createCard = async () => {
                 try {
                     const newCard = await Cards.create(state.cardData);

@@ -11,6 +11,11 @@ export default function CardListProvider({ boardId, children }) {
     }
 
     useEffect(() => {
+        /**
+         * Fetches cards for the current board and updates state
+         * @async
+         * @returns {Promise<void>}
+         */
         const fetchCards = async () => {
             const cards = await Cards.getAll(boardId);
             localStorage.setItem("cards", JSON.stringify(cards))

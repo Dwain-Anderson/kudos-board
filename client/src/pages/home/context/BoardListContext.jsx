@@ -11,6 +11,11 @@ export default function BoardListProvider({ children }) {
     }
 
     useEffect(() => {
+        /**
+         * Fetches all boards from the server and updates state
+         * @async
+         * @returns {Promise<void>}
+         */
         const fetchBoards = async () => {
             const boards = await Boards.getAll();
             localStorage.setItem("boards", JSON.stringify(boards))
