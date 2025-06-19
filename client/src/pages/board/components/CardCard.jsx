@@ -1,6 +1,6 @@
 import '../../../pages/home/components/BoardCard.css'
 import './CardCard.css'
-import { STATE_ENUM } from '../../../shared/constants';
+import { sortByPin, STATE_ENUM } from '../../../shared/constants';
 import { useState, useEffect, useContext } from 'react';
 import { Cards } from "../../../shared/api";
 import { CardListContext } from '../context/CardListContext';
@@ -9,6 +9,7 @@ export default function CardCard({ card }) {
     const [currentState, setCurrentState] = useState(null);
     const [upvotes, setUpvotes] = useState(card.upvotes);
     const { cards, updateCardList, boardId } = useContext(CardListContext);
+    const [isPinned, setIsPinned] = useState(card.pinned);
 
     /**
      * Handles upvoting a card
@@ -32,13 +33,27 @@ export default function CardCard({ card }) {
         }
     };
 
+    const handlePinAction = async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setCurrentState(STATE_ENUM.PIN);
+
+        try {
+            const updatedCardData = (card.pinned ? { pinned: false, pinnedAt: null } :{ pinned: true, pinnedAt: new Date() });
+            setIsPinned(!isPinned);
+            const newCard = { ...card, ...updatedCardData };
+            updateCardList([...cards.filter(c => c.id !== card.id), newCard]);
+            await Cards.update(card.id, boardId, updatedCardData);
+        } catch (error) {
+        }
+    }
+
     useEffect(() => {
         const deleteCard = async (cardId) => {
             try {
                 await Cards.delete(cardId, boardId);
                 updateCardList(cards.filter(c => c.id !== cardId));
             } catch (error) {
-                console.error("Failed to delete card:", error);
             }
         }
 
@@ -61,6 +76,11 @@ export default function CardCard({ card }) {
                 {card.author && <p className="card-category">By: {card.author}</p>}
 
                 <div className="card-actions">
+                    <button
+                    onClick={handlePinAction}
+                    className="card-upvote-button"
+                    >{isPinned ? 'Unpin' : 'Pin'}
+                    </button>
                     <button
                         onClick={handleUpvote}
                         className="card-upvote-button"

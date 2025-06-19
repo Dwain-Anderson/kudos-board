@@ -1,5 +1,6 @@
 import { useEffect, useState, createContext } from "react"
 import { Cards } from "../../../shared/api";
+import { sortByPin } from "../../../shared/constants";
 
 export const CardListContext = createContext();
 
@@ -7,7 +8,9 @@ export default function CardListProvider({ boardId, children }) {
     const [cards, setCards] = useState([])
 
     const updateCardList = (newList) => {
-        setCards(newList);
+        const sortedList = sortByPin(newList);
+        setCards(sortedList);
+        return sortedList;
     }
 
     useEffect(() => {
@@ -17,9 +20,9 @@ export default function CardListProvider({ boardId, children }) {
          * @returns {Promise<void>}
          */
         const fetchCards = async () => {
-            const cards = await Cards.getAll(boardId);
+            let cards = await Cards.getAll(boardId);
+            cards = updateCardList(cards);
             localStorage.setItem("cards", JSON.stringify(cards))
-            updateCardList(cards);
         }
         fetchCards();
     }, [])
