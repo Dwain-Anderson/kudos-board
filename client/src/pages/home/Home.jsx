@@ -17,18 +17,30 @@ export default function Home() {
     }
 
     return (
-        <>
+        <div className="App">
             <Header/>
-            <BoardListProvider>
-                <section className="banner">
-                    <Search/>
-                    <Sort></Sort>
-                    <button onClick={handleClick}>Create Board</button>
-                </section>
-                <BoardList/>
-                {showModal && <BoardModal showModal={showModal} setShowModal={setShowModal}/>}
-            </BoardListProvider>
+            <div className="content-wrapper">
+                <BoardListProvider>
+                    <section className="banner">
+                        <button
+                            onClick={handleClick}
+                            className="create-board-button"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M12 5v14M5 12h14"/>
+                            </svg>
+                            Create Board
+                        </button>
+                        <div className="banner-section">
+                            <Search/>
+                            <Sort/>
+                        </div>
+                    </section>
+                    <BoardList/>
+                    {showModal && <BoardModal showModal={showModal} setShowModal={setShowModal}/>}
+                </BoardListProvider>
+            </div>
             <Footer/>
-        </>
+        </div>
     )
 }

@@ -2,13 +2,14 @@ import { useContext, useEffect, useState } from 'react';
 import { BoardListContext } from '../context/BoardListContext';
 import { Boards } from "../../../shared/api";
 import { STATE_ENUM } from '../../../shared/constants';
-import { Link } from 'react-router';
-import '../../../shared/Card.css'
+import { Link } from 'react-router-dom';
+import './BoardCard.css'
 
 
 export default function BoardCard({ board }) {
     const {boards, updateBoardList} = useContext(BoardListContext);
     const [currentState, setCurrentState] = useState(null);
+    
     const handleClick = (event) => {
         event.preventDefault();
         event.stopPropagation();

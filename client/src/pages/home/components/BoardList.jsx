@@ -9,8 +9,9 @@ export default function BoardList()  {
 
     if (boards.length === 0) {
          return (
-         <div className="board-list">
-            <p>Welcome</p>
+         <div className="board-list-empty">
+            <h3>Welcome to Kudos Board!</h3>
+            <p>No boards have been created yet. Click the "Create Board" button to get started.</p>
         </div>
         )
     } else {
