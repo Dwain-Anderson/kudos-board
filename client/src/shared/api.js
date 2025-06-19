@@ -43,6 +43,15 @@ const options = (methodType, data) => {
                 },
                 body: JSON.stringify(data)
             }
+        case METHOD_ENUM.PUT:
+            return {
+                method: methodType,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }
         default:
             return {
                 method: 'GET',
@@ -116,5 +125,12 @@ export const Cards = {
 
         }
     }),
-    update: () => {},
+    update: async (cardId, boardId, data) => {
+        try {
+            const response = await (await fetch(`${SERVER_ADDRESS}/api/boards/${boardId}/cards/${cardId}`, options(METHOD_ENUM.PUT, data))).json();
+            return response.card
+        } catch (error) {
+
+        }
+    }
 }

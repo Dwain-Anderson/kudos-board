@@ -6,7 +6,7 @@ import { CardListContext } from '../context/CardListContext';
 
 export default function CardCard({card}) {
     const [currentState, setCurrentState] = useState(null);
-
+    const [upvotes, setUpvotes] = useState(card.upvotes);
     const { cards, updateCardList, boardId } = useContext(CardListContext);
 
 
@@ -16,22 +16,32 @@ export default function CardCard({card}) {
             setCurrentState(STATE_ENUM.DELETE);
     }
 
+    const handleUpvote = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setCurrentState(STATE_ENUM.UPVOTE);
+    }
+
      useEffect(() => {
-         const deleteCard = async (cardId) => {
-             try {
-                const card = await Cards.delete(cardId, boardId);
-                updateCardList(cards.filter(c => c.id !== cardId));
-             }
-             catch (error) {
-                 console.error(error);
-             }
-         }
-         if (currentState === STATE_ENUM.DELETE) {
-            deleteCard(card.id);
-         }
+        const deleteCard = async (cardId) => {
+            const card = await Cards.delete(cardId, boardId);
+            updateCardList(cards.filter(c => c.id !== cardId));
+        }
+        const upvoteCard = async (cardId) => {
+            setUpvotes(upvotes + 1);
+            const data = {...card, upvotes: card.upvotes + 1}
+            await Cards.update(cardId, boardId, data);
+        }
+        switch (currentState) {
+            case STATE_ENUM.DELETE:
+                deleteCard(card.id);
+                break;
+            case STATE_ENUM.UPVOTE:
+                upvoteCard(card.id);
+                break;
+            default:
+        }
      }, [currentState]);
-
-
 
 
     return (
@@ -45,10 +55,9 @@ export default function CardCard({card}) {
                     />
                 </div>
                 <h2 className="card-title">{card.message}</h2>
-                <p className="card-category"> {card.upvotes}</p>
-                <p>
-
-                </p>
+                <button onClick={handleUpvote} className="card-upvote-button">
+                    <p className="card-upvote"> {card.upvotes}</p>
+                </button>
                 <button onClick={handleClick} className='delete-button'>Delete</button>
             </article>
         </span>

@@ -3,7 +3,7 @@ const { database } = require('../shared');
 const BoardController = {
     getAll: (async () => {
         const boards = await database.board.findMany();
-        return boards || [];
+        return boards;
     }),
     create: (async (data) => {
         const boardData = {
@@ -20,7 +20,5 @@ const BoardController = {
         return board;
     })
 };
-
-
 
 module.exports = BoardController;
