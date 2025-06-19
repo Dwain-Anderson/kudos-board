@@ -57,10 +57,21 @@ const Controller = {
             update: async (id, data) => {
                 const updateData = {};
                 Object.keys(data).forEach((key) => {
-                    if (data[key] !== undefined) {
+                    // Skip the id field as it cannot be included in the update data
+                    if (data[key] !== undefined && key !== 'id') {
                         updateData[key] = data[key];
                     }
                 });
+
+                // Handle pinnedDate -> pinnedAt field name mismatch
+                if (data) {
+                    const pinnedDate = data['pinnedDate'];
+                    if (pinnedDate !== undefined && !('pinnedAt' in data)) {
+                        updateData.pinnedAt = pinnedDate;
+                        delete updateData.pinnedDate;
+                    }
+                }
+
                 if (Object.keys(updateData).length === 0) {
                     return await database[module.tableName].findUnique({ where: { id: Number(id) } });
                 }
@@ -99,8 +110,12 @@ const BoardModule = {
 const CardModule = {
     tableName: 'card',
     foreignKeys: ['boardId'],
+    hooks: {
+        onDelete: async (cardId) => {
+            await database.pin.deleteMany({ where: { cardId: Number(cardId) } });
+        },
+    },
 };
-
 
 
 Object.freeze(BoardModule);
@@ -109,4 +124,4 @@ Object.freeze(CardModule);
 const BoardController = Controller.Make(BoardModule);
 const CardController = Controller.Make(CardModule);
 
-module.exports = { BoardController, CardController };
+module.exports = { BoardController, CardController};

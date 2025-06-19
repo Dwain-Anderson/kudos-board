@@ -29,8 +29,10 @@ model Card {
   createdAt   DateTime @default(now())
   message     String
   author      String?
-  gifUrl       String?
+  gifUrl      String?
   upvotes     Int @default(0)
+  pinned      Boolean @default(false)
+  pinnedAt    DateTime?
   boardId     Int
   board       Board @relation(fields: [boardId], references: [id])
 }
