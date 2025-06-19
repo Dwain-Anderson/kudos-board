@@ -1,14 +1,3 @@
-.filter-container {
-  display: flex;
-  align-items: center;
-}
-
-.filter-button-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
 .filter-button {
   background-color: #f0f0f0;
   border: none;
@@ -21,43 +10,54 @@
   transition: all 0.2s ease;
 }
 
-.filter-button:hover {
-  background-color: #e0e0e0;
-}
-
 .filter-button.active {
   background-color: #3498db;
   color: white;
 }
 
+.filter-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-button:hover {
+  background-color: #e0e0e0;
+}
+
+.filter-container {
+  align-items: center;
+  display: flex;
+}
+
 @media (max-width: 768px) {
-  .filter-container {
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .filter-button-container {
-    width: 100%;
-    justify-content: center;
-  }
-
   .filter-button {
     font-size: 12px;
     padding: 5px 10px;
   }
+
+  .filter-button-container {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .filter-container {
+    margin-top: 10px;
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
-  .filter-button-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-  }
-
   .filter-button {
-    width: 100%;
-    text-align: center;
     font-size: 11px;
     padding: 5px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .filter-button-container {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(3, 1fr);
   }
 }

@@ -1,5 +1,5 @@
 import '../../../pages/home/components/BoardCard.css'
-import './CardCard.css' // For card-specific styles
+import './CardCard.css' 
 import { STATE_ENUM } from '../../../shared/constants';
 import { useState, useEffect, useContext } from 'react';
 import { Cards } from "../../../shared/api";
