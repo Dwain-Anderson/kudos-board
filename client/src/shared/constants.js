@@ -12,5 +12,6 @@ export const MAX_RECENT_BOARDS = 6;
 
 
 export const STATE_ENUM = {
-     DELETE : "DELETE"
+     DELETE : "DELETE",
+     UPVOTE : "UPVOTE"
 }

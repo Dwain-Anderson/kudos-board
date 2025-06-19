@@ -35,6 +35,7 @@ server.delete('/api/boards/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const board = await BoardController.delete(id);
+        await CardController.deleteAll(id);
         res.json({ message: 'success', board, status: 200 });
     } catch (error) {
         res.status(500).json({ message: 'error', error: error.message, status: 500 });
@@ -61,10 +62,20 @@ server.post('/api/boards/:id/cards', async (req, res) => {
     }
 })
 
-server.delete('/api/boards/:id/cards/:cardId', async (req, res) => {
+server.delete('/api/boards/:boardId/cards/:cardId', async (req, res) => {
     try {
-        const { id } = req.params;
-        const card = await CardController.delete(id);
+        const { boardId, cardId } = req.params;
+        const card = await CardController.delete(cardId);
+        res.json({ message: 'success', card, status: 200 });
+    } catch (error) {
+        res.status(500).json({ message: 'error', error: error.message, status: 500 });
+    }
+})
+
+server.put('/api/boards/:boardId/cards/:cardId', async (req, res) => {
+    try {
+        const { boardId, cardId } = req.params;
+        const card = await CardController.update(cardId, req.body);
         res.json({ message: 'success', card, status: 200 });
     } catch (error) {
         res.status(500).json({ message: 'error', error: error.message, status: 500 });
