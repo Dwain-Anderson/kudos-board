@@ -5,7 +5,7 @@ footer {
   display: flex;
   flex-shrink: 0;
   justify-content: space-between;
-  margin-top: auto; /* Push footer to bottom when content doesn't fill viewport */
+  margin-top: auto; 
   padding: 10px 15px;
   width: 100%;
 }
