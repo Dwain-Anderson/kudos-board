@@ -9,7 +9,7 @@ import './BoardCard.css'
 export default function BoardCard({ board }) {
     const {boards, updateBoardList} = useContext(BoardListContext);
     const [currentState, setCurrentState] = useState(null);
-    
+
     const handleClick = (event) => {
         event.preventDefault();
         event.stopPropagation();
@@ -23,7 +23,7 @@ export default function BoardCard({ board }) {
                 updateBoardList(boards.filter(b => b.id !== boardId));
             }
             catch (error) {
-                console.error(error);
+
             }
         }
         if (currentState === STATE_ENUM.DELETE) {
@@ -37,7 +37,7 @@ export default function BoardCard({ board }) {
             <article className="card">
                 <div className="card-image-container">
                     <img
-                        src={board.imageUrl === "" ? null : board.imageUrl}
+                        src={board.imageUrl || 'https://placehold.co/600x300?text=No+Image'}
                         alt={`${board.title} poster`}
                         className="card-image"
                     />

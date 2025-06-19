@@ -103,10 +103,8 @@ const CardModule = {
 
 
 
-
 Object.freeze(BoardModule);
 Object.freeze(CardModule);
-
 
 const BoardController = Controller.Make(BoardModule);
 const CardController = Controller.Make(CardModule);

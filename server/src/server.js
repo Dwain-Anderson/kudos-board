@@ -49,7 +49,6 @@ server.delete('/api/boards/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const board = await BoardController.delete(id);
-        await CardController.deleteAll(id);
         res.json({ message: 'success', board, status: 200 });
     } catch (error) {
         res.status(500).json({ message: 'error', error: error.message, status: 500 });
@@ -82,7 +81,7 @@ server.get('/api/boards/:id/cards', async (req, res) => {
 server.post('/api/boards/:id/cards', async (req, res) => {
     try {
         const { id } = req.params;
-        const card = await CardController.create(id, req.body);
+        const card = await CardController.create(req.body, id);
         res.json({ message: 'success', card, status: 200 });
     } catch (error) {
         res.status(500).json({ message: 'error', error: error.message, status: 500 });

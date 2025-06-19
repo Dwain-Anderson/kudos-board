@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { Boards } from "../../../shared/api";
 import { BoardListContext } from '../context/BoardListContext';
+import { fetchGifs } from "../../../shared/api";
 import './BoardModal.css';
 
 export default function BoardModal({showModal, setShowModal}) {
@@ -27,7 +28,6 @@ export default function BoardModal({showModal, setShowModal}) {
             author: formData.get('author'),
         };
         setBoardData(boardData);
-        updateBoardList([...boards, boardData])
     }
 
     useEffect(() => {
@@ -39,10 +39,19 @@ export default function BoardModal({showModal, setShowModal}) {
              */
             const createBoard = async () => {
                 try {
-                    const board = await Boards.create(boardData);
+                    const gifs = await fetchGifs(boardData.title);
+                    let imageUrl = '';
+                    if (gifs && gifs.length > 0) {
+                        imageUrl = gifs[0].images.original.url;
+                    }
+
+                    const finalizedBoardData = await Boards.create({...boardData, imageUrl});
+                    updateBoardList([...boards, finalizedBoardData])
                     setShowModal(false);
                     setBoardData(null);
                 } catch (error) {
+                    setShowModal(false);
+                    setBoardData(null);
                 }
             };
             createBoard();
