@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "node --watch index.js",
     "start": "npx prisma migrate deploy && node index.js",
-    "build": "prisma generatetirfjggedvcncjvukbifguccvkhinvgg",
+    "build": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:reset": "prisma migrate reset --force",
     "db:seed": "node prisma/seed.js",
