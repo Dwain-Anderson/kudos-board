@@ -3,10 +3,10 @@ export const GIPHY_API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
 
 export const FILTER_ENUM = {
   ALL: "all",
-  RECENT: "recent",
-  CELEBRATION: "celebration",
-  THANK_YOU: "thank you",
-  INSPIRATION: "inspiration",
+  RECENT: "Recent",
+  CELEBRATION: "Celebration",
+  THANK_YOU: "Thank you", 
+  INSPIRATION: "Inspiration",
 };
 
 export const METHOD_ENUM = {
