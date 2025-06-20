@@ -123,4 +123,8 @@ const BoardController = Controller.Make(BoardModule);
 const CardController = Controller.Make(CardModule);
 const CommentController = Controller.Make(CommentModule);
 
+Object.freeze(BoardController);
+Object.freeze(CardController);
+Object.freeze(CommentController);
+
 module.exports = { BoardController, CardController, CommentController};

@@ -1,25 +1,30 @@
 import React, { useContext } from 'react';
 import BoardCard from './BoardCard';
 import { BoardListContext } from '../context/BoardListContext';
-import "./BoardList.css"
+import "../../../shared/components/List.css";
 
 
 export default function BoardList()  {
     const { boards, updateBoardList } = useContext(BoardListContext);
 
     if (boards.length === 0) {
-         return (
-         <div className="board-list-empty">
-            <h3>Welcome to Kudos Board!</h3>
-            <p>No boards have been created yet. Click the "Create Board" button to get started.</p>
-        </div>
+        return (
+            <div className="list-wrapper">
+                <div className="list-empty">
+                    <div className="list-empty-icon">📋</div>
+                    <h3>Welcome to Kudos Board!</h3>
+                    <p>No boards have been created yet.</p>
+                </div>
+            </div>
         )
     } else {
         return (
-            <div className="board-list">
-                {boards.map((board, index) => {
-                    return <BoardCard key={index} board={board} />
-                })}
+            <div className="list-wrapper">
+                <div className="list-grid">
+                    {boards.map((board, index) => (
+                        <BoardCard key={index} board={board} />
+                    ))}
+                </div>
             </div>
         )
     }
