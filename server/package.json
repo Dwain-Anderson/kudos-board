@@ -8,8 +8,8 @@
   },
   "scripts": {
     "dev": "node --watch index.js",
-    "start": "node index.js",
-    "build": "npm install && npm run db:init",
+    "start": "npx prisma migrate deploy && node index.js",
+    "build": "prisma generatetirfjggedvcncjvukbifguccvkhinvgg",
     "db:migrate": "prisma migrate dev",
     "db:reset": "prisma migrate reset --force",
     "db:seed": "node prisma/seed.js",

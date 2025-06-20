@@ -53,7 +53,7 @@ const API = {
     return {
       /**
        * Builds the URL path for a resource, including all parent resources
-       * @param {Array} ids - IDs for each resource in the parent-child hierarchy tree
+       * @param {Array} ids - IDs for each resource in the parent-child hierarchy linked list
        * @returns {string} The URL path
        */
       formatUrl: (ids = []) => {
