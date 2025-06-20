@@ -14,7 +14,11 @@ export default function Filter() {
         break;
       case FILTER_ENUM.RECENT:
         filteredBoards.sort((a, b) => Date(b.createdAt) - Date(a.createdAt));
-        filteredBoards = filteredBoards.slice(0, MAX_RECENT_BOARDS);
+        const res = [];
+        for (let i = 0; i < MAX_RECENT_BOARDS; i++) {
+          res.push(filteredBoards[i]);
+        }
+        filteredBoards = [...res];
         break;
       case FILTER_ENUM.CELEBRATION:
       case FILTER_ENUM.THANK_YOU:
