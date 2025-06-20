@@ -13,7 +13,7 @@ export default function Filter() {
         filteredBoards = JSON.parse(localStorage.getItem("boards"));
         break;
       case FILTER_ENUM.RECENT:
-        filteredBoards.sort((a, b) => Date(b.createdAt) - Date(a.createdAt));
+        filteredBoards.sort((a, b) => Date(a.createdAt) - Date(b.createdAt));
         filteredBoards = filteredBoards.slice(0, MAX_RECENT_BOARDS);
         break;
       case FILTER_ENUM.CELEBRATION:
