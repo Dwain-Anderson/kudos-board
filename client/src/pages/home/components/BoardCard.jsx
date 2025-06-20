@@ -35,7 +35,7 @@ export default function BoardCard({ board }) {
     <div className="card">
       <div className="card-image-container">
         <img
-          src={board.imageUrl}
+          src={board.imageUrl || `https://picsum.photos/${board.id}`}
           alt={`${board.title} poster`}
           className="card-image"
         />

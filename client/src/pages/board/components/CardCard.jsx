@@ -74,7 +74,7 @@ export default function CardCard({ card }) {
   return (
     <div className="card">
       <div className="card-image-container">
-        <img src={card.gifUrl || `https://picsum.photos/${card.id}`} alt={`${card.message}`} className="card-image" />
+        <img src={card.gifUrl} alt={`${card.message}`} className="card-image" />
       </div>
       <div className="card-content">
         <p className="card-text">{card.message}</p>

@@ -43,6 +43,9 @@ export default function BoardModal({ showModal, setShowModal }) {
           let imageUrl = "";
           if (gifs && gifs.length > 0) {
             imageUrl = gifs[0].images.original.url;
+          } else {
+            const k = Math.floor(Math.random() * 1000) + 1;
+            imageUrl = `https://picsum.photos/${k}`
           }
           const finalizedBoardData = await Boards.create({
             ...boardData,
