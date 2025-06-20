@@ -9,16 +9,13 @@ export default function Filter() {
   const filterBoards = (filterType) => {
     let filteredBoards = JSON.parse(localStorage.getItem("boards"));
     switch (filterType) {
+
       case FILTER_ENUM.ALL:
         filteredBoards = JSON.parse(localStorage.getItem("boards"));
         break;
       case FILTER_ENUM.RECENT:
         filteredBoards.sort((a, b) => Date(b.createdAt) - Date(a.createdAt));
-        const res = [];
-        for (let i = 0; i < MAX_RECENT_BOARDS; i++) {
-          res.push(filteredBoards[i]);
-        }
-        filteredBoards = [...res];
+        filteredBoards = filteredBoards.slice(0, MAX_RECENT_BOARDS);
         break;
       case FILTER_ENUM.CELEBRATION:
       case FILTER_ENUM.THANK_YOU:
