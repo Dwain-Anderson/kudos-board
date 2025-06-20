@@ -5,17 +5,24 @@ import './Search.css';
 export default function Search() {
     const { boards, updateBoardList } = useContext(BoardListContext);
 
+    const prefixMatch = (query, target) => {
+        const a = query.toLowerCase();
+        const b = target.toLowerCase();
+        return  b.startsWith(a) ||  b.includes(a) || a === b
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault()
         const query = event.target.query.value
-        const filteredBoards = boards.filter(board => board.title.toLowerCase().includes(query.toLowerCase()))
+        const tmpBoards = JSON.parse(localStorage.getItem("boards"))
+        const filteredBoards = tmpBoards.filter(board => prefixMatch(query, board.title))
         updateBoardList(filteredBoards)
-        event.target.reset()
     };
 
     const handleClick = (event) => {
         event.preventDefault()
         updateBoardList(JSON.parse(localStorage.getItem("boards")))
+        document.getElementById("board-search").value = "";
     }
 
     return (
