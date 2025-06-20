@@ -3,9 +3,9 @@ export const GIPHY_API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
 
 export const FILTER_ENUM = {
   ALL: "all",
-  RECENT: "Recent",
+  RECENT: "recent",
   CELEBRATION: "Celebration",
-  THANK_YOU: "Thank you", 
+  THANK_YOU: "Thank you",
   INSPIRATION: "Inspiration",
 };
 
