@@ -6,14 +6,12 @@
   width: 100%;
 }
 
-
 .list-grid {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   width: 100%;
 }
-
 
 .list-masonry {
   column-count: 3;
@@ -25,7 +23,6 @@
   break-inside: avoid;
   margin-bottom: 20px;
 }
-
 
 .list-header {
   align-items: center;
@@ -45,7 +42,6 @@
   display: flex;
   gap: 10px;
 }
-
 
 .list-empty {
   align-items: center;
@@ -67,7 +63,6 @@
   font-size: 48px;
   margin-bottom: 10px;
 }
-
 
 @media (max-width: 1024px) {
   .list-masonry {
