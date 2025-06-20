@@ -10,6 +10,8 @@ import "./Home.css";
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
 
+  const [sharedStateSearchFilter, setSharedStateSearchFilter] = useState("");
+
   const handleClick = (event) => {
     event.preventDefault();
     setShowModal(true);
@@ -25,8 +27,8 @@ export default function Home() {
               Create Board
             </button>
             <div className="banner-section">
-              <Search />
-              <Sort />
+              <Search sharedStateSearchFilter={sharedStateSearchFilter} setSharedStateSearchFilter={ setSharedStateSearchFilter} />
+              <Sort sharedStateSearchFilter={sharedStateSearchFilter} setSharedStateSearchFilter={ setSharedStateSearchFilter}/>
             </div>
           </section>
           <BoardList />

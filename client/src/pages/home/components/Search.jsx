@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { BoardListContext } from "../context/BoardListContext";
 import "./Search.css";
 
-export default function Search() {
+export default function Search({sharedStateSearchFilter, setSharedStateSearchFilter}) {
   const { boards, updateBoardList } = useContext(BoardListContext);
 
   const prefixMatch = (query, target) => {
@@ -13,18 +13,19 @@ export default function Search() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setSharedStateSearchFilter("SEARCH");
     const query = event.target.query.value;
     const tmpBoards = JSON.parse(localStorage.getItem("boards"));
-    const filteredBoards = tmpBoards.filter((board) =>
-      prefixMatch(query, board.title),
-    );
+    const filteredBoards = tmpBoards.filter((board) => prefixMatch(query, board.title));
     updateBoardList(filteredBoards);
   };
 
   const handleClick = (event) => {
     event.preventDefault();
-    updateBoardList(JSON.parse(localStorage.getItem("boards")));
-    document.getElementById("board-search").value = "";
+    if (sharedStateSearchFilter === "SEARCH" ) {
+      updateBoardList(JSON.parse(localStorage.getItem("boards")));
+      document.getElementById("board-search").value = "";
+    }
   };
 
   return (

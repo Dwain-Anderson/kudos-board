@@ -3,7 +3,7 @@ import { BoardListContext } from "../context/BoardListContext";
 import { FILTER_ENUM, MAX_RECENT_BOARDS } from "../../../shared/constants";
 import "./Filter.css";
 
-export default function Filter() {
+export default function Filter({sharedStateSearchFilter, setSharedStateSearchFilter}) {
   const { boards, updateBoardList } = useContext(BoardListContext);
 
   const filterBoards = (filterType) => {
@@ -34,6 +34,7 @@ export default function Filter() {
   const handleFilter = (event) => {
     event.preventDefault();
     const filterType = event.target.value;
+    setSharedStateSearchFilter("FILTER")
     filterBoards(filterType);
   };
 
