@@ -7,8 +7,7 @@ import { CardListContext } from "../context/CardListContext";
 export default function CardCard({ card }) {
   const [currentState, setCurrentState] = useState(null);
   const [upvotes, setUpvotes] = useState(card.upvotes);
-  const { cards, updateCardList, boardId, openCommentsModal } =
-    useContext(CardListContext);
+  const { cards, updateCardList, boardId, openCommentsModal } = useContext(CardListContext);
   const [isPinned, setIsPinned] = useState(card.pinned);
 
   /**
@@ -75,7 +74,7 @@ export default function CardCard({ card }) {
   return (
     <div className="card">
       <div className="card-image-container">
-        <img src={card.gifUrl} alt={`${card.message}`} className="card-image" />
+        <img src={card.gifUrl || `https://picsum.photos/${card.id}`} alt={`${card.message}`} className="card-image" />
       </div>
       <div className="card-content">
         <p className="card-text">{card.message}</p>
