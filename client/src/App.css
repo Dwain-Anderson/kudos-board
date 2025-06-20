@@ -13,14 +13,15 @@ body {
   min-height: 100vh;
 }
 
-
 .content-wrapper {
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
