@@ -1,14 +1,14 @@
-import '../../../pages/home/components/BoardCard.css'
-import './CardCard.css'
-import { sortByPin, STATE_ENUM } from '../../../shared/constants';
+import '../../../shared/components/Card.css';
+import { STATE_ENUM } from '../../../shared/constants';
 import { useState, useEffect, useContext } from 'react';
 import { Cards } from "../../../shared/api";
 import { CardListContext } from '../context/CardListContext';
 
+
 export default function CardCard({ card }) {
     const [currentState, setCurrentState] = useState(null);
     const [upvotes, setUpvotes] = useState(card.upvotes);
-    const { cards, updateCardList, boardId } = useContext(CardListContext);
+    const { cards, updateCardList, boardId, openCommentsModal } = useContext(CardListContext);
     const [isPinned, setIsPinned] = useState(card.pinned);
 
     /**
@@ -49,6 +49,10 @@ export default function CardCard({ card }) {
     }
 
     useEffect(() => {
+        const fetchComments = async () => {}
+    })
+
+    useEffect(() => {
         const deleteCard = async (cardId) => {
             try {
                 await Cards.delete(cardId, boardId);
@@ -62,41 +66,64 @@ export default function CardCard({ card }) {
         }
     }, [currentState, boardId, cards, updateCardList, card.id]);
 
-    return (
-        <span className="card-container">
-            <article className="card">
-                <div className="card-image-container">
-                    <img
-                        src={card.gifUrl}
-                        alt={`${card.message}`}
-                        className="card-image"
-                    />
-                </div>
-                <h2 className="card-title">{card.message}</h2>
-                {card.author && <p className="card-category">By: {card.author}</p>}
+    const handleCommentsClick = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        openCommentsModal(card);
+    }
 
+    return (
+        <div className="card">
+            <div className="card-image-container">
+                <img
+                    src={card.gifUrl}
+                    alt={`${card.message}`}
+                    className="card-image"
+                />
+            </div>
+            <div className="card-content">
+                <p className="card-text">{card.message}</p>
+                {card.author && <p className="card-author">By: {card.author}</p>}
+            </div>
+            <div className="card-footer">
+                <div className="card-meta">
+                    {isPinned && <span className="card-badge card-badge-primary">Pinned</span>}
+                    <span className="card-upvote">{upvotes} upvotes</span>
+                </div>
                 <div className="card-actions">
                     <button
-                    onClick={handlePinAction}
-                    className="card-upvote-button"
-                    >{isPinned ? 'Unpin' : 'Pin'}
+                        onClick={handlePinAction}
+                        className="card-action-btn"
+                    >
+                        {isPinned ? 'Unpin' : 'Pin'}
                     </button>
                     <button
                         onClick={handleUpvote}
-                        className="card-upvote-button"
+                        className="card-action-btn"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M12 19V5M5 12l7-7 7 7" />
                         </svg>
-                        <span className="card-upvote">{upvotes}</span>
+                        Upvote
                     </button>
-                    <button onClick={((event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        setCurrentState(STATE_ENUM.DELETE);
-                    })} className='delete-button'>Delete</button>
+                    <button
+                        onClick={(event) => {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            setCurrentState(STATE_ENUM.DELETE);
+                        }}
+                        className="card-action-btn"
+                    >
+                        Delete
+                    </button>
+                    <button
+                        onClick={handleCommentsClick}
+                        className="card-action-btn"
+                    >
+                        Comments
+                    </button>
                 </div>
-            </article>
-        </span>
+            </div>
+        </div>
     )
 }

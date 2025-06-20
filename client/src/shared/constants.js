@@ -17,10 +17,9 @@ export const STATE_ENUM = {
      PIN: "PIN"
 }
 
-
 export function sortByPin(cards) {
     const pinnedCards = cards.filter(card => card.pinned);
     pinnedCards.sort((a, b) => b.pinnedAt - a.pinnedAt);
-    const unpinnedCards = cards.filter(card => !card.pinned);
+    const unpinnedCards = cards.filter(card =>  !card.pinned);
     return pinnedCards.concat(unpinnedCards);
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Cards, fetchGifs } from "../../../shared/api";
 import { CardListContext } from '../context/CardListContext';
+import '../../../shared/components/Modal.css';
 
 export default function CardModal({ showModal, setShowModal }) {
     const [state, setState] = useState({
@@ -107,7 +108,7 @@ export default function CardModal({ showModal, setShowModal }) {
              */
             const createCard = async () => {
                 try {
-                    const newCard = await Cards.create(state.cardData);
+                    const newCard = await Cards.create(state.cardData, boardId);
                     updateCardList([...cards, newCard]);
                     setShowModal(false);
                     resetForm();
@@ -120,14 +121,14 @@ export default function CardModal({ showModal, setShowModal }) {
     }, [state.cardData]);
 
     return (
-        <div className="modal" onClick={handleOverlayClick}>
-            <div className="modal-content">
+        <div className="modal-overlay" onClick={handleOverlayClick}>
+            <div className="modal-container">
                 <div className="modal-header">
                     <h2>Add New Card</h2>
                 </div>
-                <div className="gif-search-section">
+                <div className="modal-section">
                     <h3>Search for a GIF</h3>
-                    <form className="search-form" onSubmit={handleSearchSubmit}>
+                    <form className="search-container" onSubmit={handleSearchSubmit}>
                         <input
                             id="gif-search"
                             className="search-input"
@@ -141,11 +142,11 @@ export default function CardModal({ showModal, setShowModal }) {
 
                     <div className="gif-results">
                         {state.gifs.length > 0 && (
-                            <div className="gif-grid">
+                            <div className="grid-container">
                                 {state.gifs.map((gif, index) => (
                                     <div
                                         key={index}
-                                        className={`gif-item ${state.selectedGif === gif.images.fixed_height.url ? 'selected' : ''}`}
+                                        className={`grid-item ${state.selectedGif === gif.images.fixed_height.url ? 'selected' : ''}`}
                                         onClick={() => handleGifSelect(gif.images.fixed_height.url)}
                                     >
                                         <img
@@ -160,15 +161,15 @@ export default function CardModal({ showModal, setShowModal }) {
                     </div>
                 </div>
 
-                <div className="add-form">
-                    <form id="add-card" onSubmit={handleFormSubmit}>
-                        <label htmlFor="message">Enter card message</label>
-                        <input type="text" id="message" name="message" required />
+                <div className="modal-section">
+                    <form id="add-card" className="form-container" onSubmit={handleFormSubmit}>
+                        <label htmlFor="message" className="form-label">Enter card message</label>
+                        <input type="text" id="message" name="message" className="form-input" required />
 
-                        <label htmlFor="author">Enter card author</label>
-                        <input type="text" id="author" name="author" />
+                        <label htmlFor="author" className="form-label">Enter card author</label>
+                        <input type="text" id="author" name="author" className="form-input" />
 
-                        <label htmlFor="gifUrl">GIF URL</label>
+                        <label htmlFor="gifUrl" className="form-label">GIF URL</label>
                         <input
                             type="text"
                             id="gifUrl"
@@ -176,14 +177,15 @@ export default function CardModal({ showModal, setShowModal }) {
                             value={state.selectedGif}
                             readOnly
                             placeholder="Select a GIF from the search results above"
+                            className="form-input"
                         />
 
-                        <div className="form-actions">
-                            <button type="button" onClick={() => {
+                        <div className="btn-group">
+                            <button type="button" className="btn btn-secondary" onClick={() => {
                                 setShowModal(false);
                                 resetForm();
                             }}>Cancel</button>
-                            <button type="submit" className="add-button">Add</button>
+                            <button type="submit" className="btn btn-primary">Add</button>
                         </div>
                     </form>
                 </div>
