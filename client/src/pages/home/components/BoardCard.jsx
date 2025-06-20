@@ -23,7 +23,9 @@ export default function BoardCard({ board }) {
     const deleteBoard = async (boardId) => {
       try {
         const board = await Boards.delete(boardId);
-        updateBoardList(boards.filter((b) => b.id !== boardId));
+        const tmpBoards = boards.filter((b) => b.id !== boardId);
+        localStorage.setItem("boards", JSON.stringify(tmpBoards));
+        updateBoardList(tmpBoards);
       } catch (error) {}
     };
     if (currentState === STATE_ENUM.DELETE) {
