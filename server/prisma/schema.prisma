@@ -35,4 +35,14 @@ model Card {
   pinnedAt    DateTime?
   boardId     Int
   board       Board @relation(fields: [boardId], references: [id])
+  comments    Comment[]
+}
+
+model Comment {
+  id          Int  @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  message     String
+  cardId      Int
+  comment     Card @relation(fields: [cardId], references: [id])
+  author      String?
 }

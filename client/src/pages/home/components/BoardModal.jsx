@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { Boards } from "../../../shared/api";
 import { BoardListContext } from '../context/BoardListContext';
 import { fetchGifs } from "../../../shared/api";
-import './BoardModal.css';
+import '../../../shared/components/Modal.css';
 
 export default function BoardModal({showModal, setShowModal}) {
     const [boardData, setBoardData] = useState(null)
@@ -13,7 +13,7 @@ export default function BoardModal({showModal, setShowModal}) {
     }
 
     const handleOverlayClick = (event) => {
-        if (event.target.className === 'modal') {
+        if (event.target.className === 'modal-overlay') {
             setShowModal(false);
             setBoardData(null)
         }
@@ -44,7 +44,6 @@ export default function BoardModal({showModal, setShowModal}) {
                     if (gifs && gifs.length > 0) {
                         imageUrl = gifs[0].images.original.url;
                     }
-
                     const finalizedBoardData = await Boards.create({...boardData, imageUrl});
                     updateBoardList([...boards, finalizedBoardData])
                     setShowModal(false);
@@ -59,30 +58,30 @@ export default function BoardModal({showModal, setShowModal}) {
     }, [boardData]);
 
     return (
-        <div className="modal" onClick={handleOverlayClick}>
-            <div className="modal-content" >
+        <div className="modal-overlay" onClick={handleOverlayClick}>
+            <div className="modal-container">
                 <div className="modal-header">
                     <h2>Add New Board</h2>
                 </div>
-                <div className="add-form">
-                    <form id="add-board" onSubmit={handleFormSubmit}>
-                        <label htmlFor="title">Title:</label>
-                        <input type="text" id="title" name="title" required/>
+                <div className="modal-section">
+                    <form id="add-board" className="form-container" onSubmit={handleFormSubmit}>
+                        <label htmlFor="title" className="form-label">Title:</label>
+                        <input type="text" id="title" name="title" className="form-input" required/>
 
-                        <label htmlFor="category">Category:</label>
-                        <select id="category" name="category" className="category-select" required>
+                        <label htmlFor="category" className="form-label">Category:</label>
+                        <select id="category" name="category" className="form-select" required>
                             <option value="">Select a category</option>
                             <option value="Celebration">Celebration</option>
                             <option value="Thank you">Thank you</option>
                             <option value="Inspiration">Inspiration</option>
                         </select>
 
-                        <label htmlFor="author">Author:</label>
-                        <input type="text" id="author" name="author" required/>
+                        <label htmlFor="author" className="form-label">Author:</label>
+                        <input type="text" id="author" name="author" className="form-input" required/>
 
-                        <div className="form-actions">
-                            <button type="button" onClick={() => setShowModal(false)}>Cancel</button>
-                            <button type="submit" className="add-button">Add</button>
+                        <div className="btn-group">
+                            <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancel</button>
+                            <button type="submit" className="btn btn-primary">Add</button>
                         </div>
                     </form>
                 </div>

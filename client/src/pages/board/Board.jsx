@@ -5,6 +5,7 @@ import { useParams, useLocation} from 'react-router';
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import CardModal from "./components/CardModal";
+import CommentsViewContainer from "./context/CommentsViewContainer";
 import BoardPreview from "./components/BoardPreview";
 import './Board.css';
 
@@ -15,8 +16,6 @@ export default function Board() {
 
     const [showModal, setShowModal] = useState(false);
 
-
-    // Get board data from location state
     const board = location.state || { title: "Board", category: "Unknown" };
 
     return (
@@ -31,7 +30,6 @@ export default function Board() {
                         Back To Home
                     </Link>
 
-                    {/* Board preview card */}
                     <BoardPreview board={board} />
 
                     <CardListProvider boardId={boardId}>
@@ -48,6 +46,7 @@ export default function Board() {
                         </div>
                         <CardList />
                         {showModal && <CardModal showModal={showModal} setShowModal={setShowModal} />}
+                        <CommentsViewContainer />
                     </CardListProvider>
                 </div>
             </div>

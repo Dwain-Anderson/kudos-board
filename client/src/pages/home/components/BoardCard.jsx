@@ -3,7 +3,7 @@ import { BoardListContext } from '../context/BoardListContext';
 import { Boards } from "../../../shared/api";
 import { STATE_ENUM } from '../../../shared/constants';
 import { Link } from 'react-router-dom';
-import './BoardCard.css'
+import '../../../shared/components/Card.css';
 
 
 export default function BoardCard({ board }) {
@@ -21,8 +21,7 @@ export default function BoardCard({ board }) {
             try {
                 const board = await Boards.delete(boardId);
                 updateBoardList(boards.filter(b => b.id !== boardId));
-            }
-            catch (error) {
+            } catch (error) {
 
             }
         }
@@ -33,21 +32,35 @@ export default function BoardCard({ board }) {
 
 
     return (
-        <span className="card-container">
-            <article className="card">
-                <div className="card-image-container">
-                    <img
-                        src={board.imageUrl || 'https://placehold.co/600x300?text=No+Image'}
-                        alt={`${board.title} poster`}
-                        className="card-image"
-                    />
-                </div>
+        <div className="card">
+            <div className="card-image-container">
+                <img
+                    src={board.imageUrl}
+                    alt={`${board.title} poster`}
+                    className="card-image"
+                />
+            </div>
+            <div className="card-content">
                 <h2 className="card-title">{board.title}</h2>
-                <p className="card-category">Category: {board.category}</p>
-                <Link state={board} to={`/board-details/${board.id}`} className="card-button">View Details</Link>
-
-                <button className='delete-button' onClick={handleClick}>Delete</button>
-            </article>
-        </span>
+                <p className="card-subtitle">Category: {board.category}</p>
+            </div>
+            <div className="card-footer">
+                <Link
+                    state={board}
+                    to={`/board-details/${board.id}`}
+                    className="btn btn-primary"
+                >
+                    View Details
+                </Link>
+                <div className="card-actions">
+                    <button
+                        className="card-action-btn"
+                        onClick={handleClick}
+                    >
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
     )
 }
