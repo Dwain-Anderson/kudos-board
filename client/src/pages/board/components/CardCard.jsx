@@ -48,22 +48,22 @@ export default function CardCard({ card }) {
     } catch (error) {}
   };
 
-  useEffect(() => {
-    const fetchComments = async () => {};
-  });
 
   useEffect(() => {
     const deleteCard = async (cardId) => {
       try {
         await Cards.delete(cardId, boardId);
-        updateCardList(cards.filter((c) => c.id !== cardId));
-      } catch (error) {}
+        const tmpCards = cards.filter((c) => c.id !== cardId);
+        updateCardList(tmpCards);
+      } catch (error) {
+
+      }
     };
 
     if (currentState === STATE_ENUM.DELETE) {
       deleteCard(card.id);
     }
-  }, [currentState, boardId, cards, updateCardList, card.id]);
+  }, [currentState]); // Remove cards from dependency array
 
   const handleCommentsClick = (event) => {
     event.preventDefault();
