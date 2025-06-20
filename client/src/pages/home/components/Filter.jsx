@@ -7,7 +7,6 @@ export default function Filter() {
   const { boards, updateBoardList } = useContext(BoardListContext);
 
   const filterBoards = (filterType) => {
-    console.log("filtering boards by", filterType);
     let filteredBoards = JSON.parse(localStorage.getItem("boards"));
     switch (filterType) {
       case FILTER_ENUM.ALL:

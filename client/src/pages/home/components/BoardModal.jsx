@@ -51,7 +51,9 @@ export default function BoardModal({ showModal, setShowModal }) {
             ...boardData,
             imageUrl,
           });
-          updateBoardList([...boards, finalizedBoardData]);
+          const updatedBoards = [...boards, finalizedBoardData]
+          localStorage.setItem("boards", JSON.stringify(updatedBoards));
+          updateBoardList(updatedBoards);
           setShowModal(false);
           setBoardData(null);
         } catch (error) {
