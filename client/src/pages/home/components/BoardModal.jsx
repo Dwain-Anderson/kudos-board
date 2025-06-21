@@ -111,7 +111,6 @@ export default function BoardModal({ showModal, setShowModal }) {
               id="author"
               name="author"
               className="form-input"
-              required
             />
 
             <div className="btn-group">

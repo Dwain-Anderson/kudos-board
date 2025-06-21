@@ -63,7 +63,7 @@ export default function CardCard({ card }) {
     if (currentState === STATE_ENUM.DELETE) {
       deleteCard(card.id);
     }
-  }, [currentState]); // Remove cards from dependency array
+  }, [currentState]); 
 
   const handleCommentsClick = (event) => {
     event.preventDefault();
